@@ -1,4 +1,6 @@
-from django.shortcuts import HttpResponse
+from django.shortcuts import HttpResponse, redirect
+
+from .models import Account
 
 
 def index(request):
@@ -6,4 +8,9 @@ def index(request):
 
 
 def account(request, iban):
-    return HttpResponse(f"Account: {iban}")
+    try:
+        account = Account.objects.get(iban=iban)
+    except:
+        return redirect("bank:index")
+
+    return HttpResponse(f"{iban}: {account.balance}")
