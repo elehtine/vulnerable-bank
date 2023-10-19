@@ -1,15 +1,15 @@
 from django.conf import settings
 from django.shortcuts import redirect, render
+from django.contrib.auth.decorators import login_required
 
 from .models import Account
 
 
 def index(request):
-    if not request.user.is_authenticated:
-        return redirect(f'{settings.LOGIN_URL}?next={request.path}')
     return render(request, 'bank/index.html')
 
 
+@login_required
 def account(request, iban):
     try:
         account = Account.objects.get(iban=iban)
