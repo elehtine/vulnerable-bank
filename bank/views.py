@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.shortcuts import HttpResponse, redirect, render
+from django.shortcuts import redirect, render
 
 from .models import Account
 
@@ -16,4 +16,5 @@ def account(request, iban):
     except:
         return redirect('bank:index')
 
-    return HttpResponse(f'{iban}: {account.balance}')
+    context = { 'account': account }
+    return render(request, 'bank/account.html', context)
