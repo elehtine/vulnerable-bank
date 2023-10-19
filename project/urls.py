@@ -1,9 +1,10 @@
 from django.contrib import admin
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/login/', LoginView.as_view(template_name="bank/login.html")),
-    path('bank/', include('bank.urls')),
+    path('login/', LoginView.as_view()),
+    path('logout/', LogoutView.as_view(next_page='/')),
+    path('', include('bank.urls')),
 ]
