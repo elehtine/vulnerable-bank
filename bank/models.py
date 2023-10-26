@@ -4,7 +4,7 @@ from django.db import models
 
 
 class Account(models.Model):
-    owner = models.ForeignKey(
+    owner = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         default=User.objects.get(username="admin").pk,
