@@ -10,9 +10,21 @@
   <body>
     <div id="sidebar">
       {% block sidebar %}
+
+      {% if user.is_authenticated %}
+      <p>Logged in as <strong>{{ user.username }}</strong></p>
+      <a href="{% url 'logout' %}">Logout</a>
+      {% else %}
+      <a href="{% url 'login' %}">Login</a>
+      {% endif %}
+
       <ul>
         <li><a href="/">Bank</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="/{{ user.account.iban }}">My account: {{ user.username }}</a></li>
+        {% endif %}
       </ul>
+
       {% endblock %}
     </div>
 
