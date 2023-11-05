@@ -12,9 +12,10 @@ def index(request):
 @login_required
 def account(request, iban):
     try:
-        account = Account.objects.get(iban=iban)
+        user = Account.objects.get(iban=iban)
+        accounts = Account.objects.exclude(iban=iban)
     except:
         return redirect('bank:index')
 
-    context = { 'account': account }
+    context = { 'user': user, 'accounts': accounts }
     return render(request, 'bank/account.html', context)

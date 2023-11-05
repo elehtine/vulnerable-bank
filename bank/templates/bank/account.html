@@ -1,5 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-{{account.iban}}: {{account.balance}}
+
+{{ user.iban }}: {{ user.balance }}
+
+<form method="POST">
+  <fieldset>
+    <legend>Send money</legend>
+    <select>
+      {% for account in accounts %}
+      <option value={{ account.iban }}>{{ account.iban }}</option>
+      {% endfor %}
+    </select>
+    <label for="amount">Amount:</label>
+    <input type="number" name="amount" />
+    <input type="submit" value="Send" />
+  </fieldset>
+</form>
+
 {% endblock %}
