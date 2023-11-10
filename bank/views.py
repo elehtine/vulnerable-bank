@@ -9,8 +9,15 @@ def index(request):
     return render(request, 'bank/index.html')
 
 
+def transfer(send, receive, amount):
+    pass
+
+
 @login_required
 def account(request, iban):
+    if request.method == 'POST':
+        pass
+
     try:
         user = Account.objects.get(iban=iban)
         accounts = Account.objects.exclude(iban=iban)

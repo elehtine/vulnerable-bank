@@ -5,6 +5,7 @@
 {{ user.iban }}: {{ user.balance }}
 
 <form method="POST">
+  {% csrf_token %}
   <fieldset>
     <legend>Send money</legend>
     <select>
