@@ -8,3 +8,12 @@ project contains five vulnerabilities and their fixes.
 3. Authorization
 4. CSRF
 5. Insecure design
+
+## Set up project
+
+Run following commands to set up project on your machine:
+
+```
+python3 manage.py migrate
+python3 manage.py loaddata initial.json
+```
