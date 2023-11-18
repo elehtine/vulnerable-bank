@@ -7,7 +7,6 @@ class Account(models.Model):
     owner = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        default=User.objects.get(username="admin").pk,
     )
     iban = models.CharField(max_length=30, unique=True)
     balance = models.IntegerField()
