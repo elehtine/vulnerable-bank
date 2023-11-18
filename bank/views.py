@@ -28,7 +28,7 @@ def account(request, username):
         account = Account.objects.get(owner__username=username)
         others = Account.objects.exclude(owner__username=username)
     except:
-        return redirect('bank:index')
+        return redirect('blog:index')
 
     context = { 'account': account, 'others': others }
     return render(request, 'bank/account.html', context)

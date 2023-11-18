@@ -1,16 +1,26 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div>
+  <h1>Messages</h1>
 
-<form method="POST">
-  {% csrf_token %}
-  <fieldset>
-    <legend>Send message</legend>
-    <label for="message">Message:</label>
-    <input name="message" id="message" />
-    <input type="submit" value="Send" />
-  </fieldset>
-</form>
+  {% if user.is_authenticated %}
+  <form method="POST">
+    {% csrf_token %}
+    <fieldset>
+      <legend>Send message</legend>
+      <label for="message">Message:</label>
+      <input name="message" id="message" />
+      <input type="submit" value="Send" />
+    </fieldset>
+  </form>
+  {% endif %}
 
+  <ul>
+    {% for message in messages %}
+    <li>{{ message.text }}</li>
+    {% endfor %}
+  </ul>
+</div>
 
 {% endblock %}
