@@ -8,7 +8,7 @@
   {% csrf_token %}
   <fieldset>
     <legend>Send money</legend>
-    <select>
+    <select name="receiver">
       {% for other in others %}
       <option value={{ other.owner.username }}>{{ other.owner.username }}</option>
       {% endfor %}
