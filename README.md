@@ -16,4 +16,12 @@ Run following commands to set up project on your machine:
 ```
 python3 manage.py migrate
 python3 manage.py loaddata initial.json
+python3 manage.py runserver
 ```
+
+There is following three users:
+| username | password    |
+|----------|-------------|
+| admin    | admin       |
+| alice    | redqueen    |
+| bob      | squarepants |
