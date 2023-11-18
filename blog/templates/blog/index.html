@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form method="POST">
+  {% csrf_token %}
+  <fieldset>
+    <legend>Send message</legend>
+    <label for="message">Message:</label>
+    <input name="message" id="message" />
+    <input type="submit" value="Send" />
+  </fieldset>
+</form>
+
+
+{% endblock %}

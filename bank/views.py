@@ -6,10 +6,6 @@ from django.db import transaction
 from .models import Account
 
 
-def index(request):
-    return render(request, 'bank/index.html')
-
-
 @transaction.atomic
 def transfer(sender_username, receiver_username, amount):
     sender = Account.objects.get(owner__username=sender_username)
