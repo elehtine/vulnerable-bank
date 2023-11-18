@@ -21,7 +21,7 @@
       <ul>
         <li><a href="/">Bank</a></li>
         {% if user.is_authenticated %}
-        <li><a href="/{{ user.account.iban }}">My account: {{ user.username }}</a></li>
+        <li><a href="/{{ user.username }}">My account: {{ user.username }}</a></li>
         {% endif %}
       </ul>
 

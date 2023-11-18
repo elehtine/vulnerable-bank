@@ -8,5 +8,4 @@ class Account(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
-    iban = models.CharField(max_length=30, unique=True)
     balance = models.IntegerField()

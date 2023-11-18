@@ -14,15 +14,15 @@ def transfer(send, receive, amount):
 
 
 @login_required
-def account(request, iban):
+def account(request, username):
     if request.method == 'POST':
         pass
 
     try:
-        user = Account.objects.get(iban=iban)
-        accounts = Account.objects.exclude(iban=iban)
+        account = Account.objects.get(owner__username=username)
+        others = Account.objects.exclude(owner__username=username)
     except:
         return redirect('bank:index')
 
-    context = { 'user': user, 'accounts': accounts }
+    context = { 'account': account, 'others': others }
     return render(request, 'bank/account.html', context)

@@ -2,15 +2,15 @@
 
 {% block content %}
 
-{{ user.iban }}: {{ user.balance }}
+{{ account.owner.username }}: {{ account.balance }}
 
 <form method="POST">
   {% csrf_token %}
   <fieldset>
     <legend>Send money</legend>
     <select>
-      {% for account in accounts %}
-      <option value={{ account.iban }}>{{ account.iban }}</option>
+      {% for other in others %}
+      <option value={{ other.owner.username }}>{{ other.owner.username }}</option>
       {% endfor %}
     </select>
     <label for="amount">Amount:</label>
