@@ -52,22 +52,26 @@ the future.
 ### Crosse-site request forgery
 [project.settings.py](https://github.com/elehtine/vulnerable-bank/tree/main/project/settings.py#L55)
 [bank/templates/bank/account.html](https://github.com/elehtine/vulnerable-bank/tree/main/bank/templates/bank/account.html#L8)
-description of flaw 2...
-how to fix it...
 
 Vulnerable bank doesn't prevent cross-site request forgery. This way malicious
 user could make own form which will create post request to vulnerable bank. If
 careless user submits form then malicious user could get money transform from
 careless user.
 
-Example of such form could be like this:
+This is form that Bob could use to get money from Alice:
 ```
-<form method="POST" data-dashlane-rid="d54f74f357864957" data-form-type="other">
+<form action="localhost:8080/bank/alice" method="POST">
     <input type="hidden" name="receiver" value="bob" />
     <input type="hidden" name="amount" value="1000000" />
     <input type="submit" value="View pictures" />
 </form>
 ```
+
+This can be tried running server with
+```
+python3 -m http.server 9000
+```
+and trying to click button in [malicious_link.html](http://localhost:9000/malicious_link.html).
 
 This can be fixed by using CSRF middleware token. It will generate new request
 for every request of the page. Without up to date token requests are not
