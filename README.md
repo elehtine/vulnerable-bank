@@ -3,6 +3,12 @@
 This course project for Cyber Security course in University of Helsinki. This
 project contains five vulnerabilities and their fixes.
 
+## Fixing flaws
+
+Vulnerability flaws are toggled off by changing `FIX_FLAWS = True` in
+project/settings.py.
+
+
 ## Installing instructions
 
 Run following commands to set up and run project on your machine:
