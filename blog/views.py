@@ -6,7 +6,7 @@ from .models import Message
 def index(request):
     if request.method == 'POST':
         text = request.POST['message']
-        message = Message(owner=request.user, text=text)
+        message = Message(sender=request.user, text=text)
         message.save()
 
     try:
