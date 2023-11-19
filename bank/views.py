@@ -23,6 +23,10 @@ def transfer(sender_username, receiver_username, amount):
 
 @login_required
 def account(request, username):
+    authorised = username == request.user.username
+    if settings.FIX_FLAWS and not authorised:
+        return redirect('blog:index')
+
     if request.method == 'POST':
         receiver_username = request.POST['receiver']
         amount = int(request.POST['amount'])

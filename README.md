@@ -78,24 +78,36 @@ for every request of the page. Without up to date token requests are not
 processed and malicious form would do nothing.
 
 
-FLAW 3:
-exact source link pinpointing flaw 3...
-description of flaw 3...
-how to fix it...
+### Identification and Authentication
+[initial.json](https://github.com/elehtine/vulnerable-bank/tree/main/initial.json#9)
 
 OWASP top 10 has Identification and Authentication Failures. It includes
 permits default, weak, or well-known passwords, such as "Password1" or
 "admin/admin".
 
-Project admin user indeed is "admin/admin" which should not be allowed.
+Project admin user indeed is "admin/admin" which should not be allowed. This
+can be avoided by not loading `initial.json` data and creating admin user with 
+```
+python3 manage.py createsuperuser
+```
+This command prevents creating users with weak passwords.
+
+Strategies against this kind of threats include implementing multi-factor
+authentication, implementing weak password checks when testing new or changed
+passwords, and limiting failed login attempts.
 
 
-FLAW 4:
-exact source link pinpointing flaw 4...
-description of flaw 4...
-how to fix it...
+### Broken Access Control
+[bank/views.py](https://github.com/elehtine/vulnerable-bank/tree/main/bank/views.py#L26)
 
-Broken Access Control bank doesn't authorise users.
+Vulnerable bank doesn't authorise users. Users could even go each other's bank
+pages and send money for themselves by replacing their username in the url with
+other user.
+
+This can be fixed by checking which user made the transfer request instead of
+allowing users to inform in the url which user is sending money. In my fix I
+compared these two to each other. Often access control mechanism is implemented
+once and used through the application.
 
 
 FLAW 5:
