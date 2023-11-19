@@ -31,16 +31,24 @@ There is following three users:
 Project [vulnerable-bank](https://github.com/elehtine/vulnerable-bank) contains
 source code and installing instructions.
 
-FLAW 1:
-exact source link pinpointing flaw 1...
-description of flaw 1...
-how to fix it...
+Security flaws are from OWASP Top 10 for 2021 list.
 
-Blog message could contain SQL injection. Malicious user could for example post
-a message which contains SQL to delete all messages.
+### Insecure design
+[bank/views.py](https://github.com/elehtine/vulnerable-bank/tree/main/bank/views.py#L14)
+
+There is no validation for sending money in bank. That could easily be taken
+advantage of by sending negative amount of money. In that way sender gets money
+from the receiver.
+
+It will be fixed by validating input. It should be done in the backend but it
+is often also done in the frontend so error is easier to avoid by users. This
+kind of flaws in business domain are not always easy to spot by programmers.
+These flaws can be less trivial. In this bank case it is easy to spot and fix.
+Also unit tests are often added to ensure that validation will be working in
+the future.
 
 
-FLAW 2:
+### Crosse-site request forgery
 exact source link pinpointing flaw 2...
 description of flaw 2...
 how to fix it...
@@ -73,4 +81,5 @@ exact source link pinpointing flaw 5...
 description of flaw 5...
 how to fix it...
 
-Insecure design. Negative amount can be sent in bank.
+Blog message could contain SQL injection. Malicious user could for example post
+a message which contains SQL to delete all messages.

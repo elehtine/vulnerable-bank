@@ -11,10 +11,9 @@ def transfer(sender_username, receiver_username, amount):
     sender = Account.objects.get(owner__username=sender_username)
     receiver = Account.objects.get(owner__username=receiver_username)
 
-    if settings.FIX_FLAWS:
-        if amount < 0 or amount > sender.balance:
-            return
-
+    illegal_argument = not 0 <= amount <= sender.balance
+    if settings.FIX_FLAWS and illegal_argument:
+        return
 
     sender.balance -= amount
     receiver.balance += amount
