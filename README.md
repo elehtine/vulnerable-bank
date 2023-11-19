@@ -3,6 +3,12 @@
 This course project for Cyber Security course in University of Helsinki. This
 project contains five vulnerabilities and their fixes.
 
+Project contains banking system. Initial users have accounts in the bank. They
+can send money to each other. If new accounts are created with Django's admin
+page their bank accounts needs to be added manually.
+
+There is additional blog application where users can send messages.
+
 ## Fixing flaws
 
 Vulnerability flaws are toggled off by changing `FIX_FLAWS = True` in
