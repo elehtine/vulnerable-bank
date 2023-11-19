@@ -5,7 +5,10 @@
 {{ account.owner.username }}: {{ account.balance }}
 
 <form method="POST">
+  {% if FIX_FLAWS %}
   {% csrf_token %}
+  {% endif %}
+
   <fieldset>
     <legend>Send money</legend>
     <select name="receiver">

@@ -52,6 +52,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+if not FIX_FLAWS:
+    MIDDLEWARE.remove('django.middleware.csrf.CsrfViewMiddleware')
 
 ROOT_URLCONF = 'project.urls'
 

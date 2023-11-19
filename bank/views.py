@@ -34,5 +34,9 @@ def account(request, username):
     except:
         return redirect('blog:index')
 
-    context = { 'account': account, 'others': others }
+    context = {
+        'account': account,
+        'others': others,
+        'FIX_FLAWS': settings.FIX_FLAWS
+    }
     return render(request, 'bank/account.html', context)

@@ -29,7 +29,8 @@ There is following three users:
 ## Report
 
 Project [vulnerable-bank](https://github.com/elehtine/vulnerable-bank) contains
-source code and installing instructions.
+source code and installing instructions. All security flaws are fixed by
+setting variable in `project/settings.py`.
 
 Security flaws are from OWASP Top 10 for 2021 list.
 
@@ -49,11 +50,28 @@ the future.
 
 
 ### Crosse-site request forgery
-exact source link pinpointing flaw 2...
+[project.settings.py](https://github.com/elehtine/vulnerable-bank/tree/main/project/settings.py#L55)
+[bank/templates/bank/account.html](https://github.com/elehtine/vulnerable-bank/tree/main/bank/templates/bank/account.html#L8)
 description of flaw 2...
 how to fix it...
 
-Bank doesn't prevent cross-site request forgery.
+Vulnerable bank doesn't prevent cross-site request forgery. This way malicious
+user could make own form which will create post request to vulnerable bank. If
+careless user submits form then malicious user could get money transform from
+careless user.
+
+Example of such form could be like this:
+```
+<form method="POST" data-dashlane-rid="d54f74f357864957" data-form-type="other">
+    <input type="hidden" name="receiver" value="bob" />
+    <input type="hidden" name="amount" value="1000000" />
+    <input type="submit" value="View pictures" />
+</form>
+```
+
+This can be fixed by using CSRF middleware token. It will generate new request
+for every request of the page. Without up to date token requests are not
+processed and malicious form would do nothing.
 
 
 FLAW 3:
