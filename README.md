@@ -110,10 +110,18 @@ compared these two to each other. Often access control mechanism is implemented
 once and used through the application.
 
 
-FLAW 5:
-exact source link pinpointing flaw 5...
+### Injection
+[blog/views.py](https://github.com/elehtine/vulnerable-bank/tree/main/blog/views.py#L13)
 description of flaw 5...
 how to fix it...
 
 Blog message could contain SQL injection. Malicious user could for example post
-a message which contains SQL to delete all messages.
+a message which shows other user's balance.
+
+Following input creates message which contains balance of admin:
+```
+message', 3), ((SELECT balance FROM bank_account WHERE owner_id = 1), 3); --
+```
+
+This can be avoided by escaping all text given to queries. Every database
+management system have implemented protection against SQL injection.

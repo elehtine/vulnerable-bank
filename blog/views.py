@@ -1,4 +1,6 @@
 from django.shortcuts import redirect, render
+from django.db import connection
+from django.conf import settings
 
 from .models import Message
 
@@ -6,8 +8,16 @@ from .models import Message
 def index(request):
     if request.method == 'POST':
         text = request.POST['message']
-        message = Message(sender=request.user, text=text)
-        message.save()
+        sender_id = request.user.id
+
+        if settings.FIX_FLAWS:
+            query = "INSERT INTO blog_message (text, sender_id) VALUES (%s, %s);"
+            with connection.cursor() as cursor:
+                cursor.execute(query, [text, sender_id])
+        else:
+            query = f"INSERT INTO blog_message (text, sender_id) VALUES ('{text}', {sender_id});"
+            with connection.cursor() as cursor:
+                cursor.execute(query)
 
     try:
         messages = Message.objects.all()
